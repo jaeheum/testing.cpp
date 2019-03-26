@@ -1,0 +1,2 @@
+add_conventional_library(testing_v1)
+target_link_libraries(testing_v1 PUBLIC polyfill_v1)
