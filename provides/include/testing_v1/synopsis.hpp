@@ -4,7 +4,7 @@
 
 namespace testing_v1 {
 
-struct test_base_t;
+// test.hpp --------------------------------------------------------------------
 
 template <class Action> struct test_t;
 
