@@ -24,12 +24,14 @@ protected:
 } // namespace testing_v1
 
 template <class Action> struct testing_v1::test_t : test_base_t {
-  test_t(Action &&action) : action(std::move(action)) {}
-  test_t(const Action &action) : action(action) {}
+  template <class ForwardableAction>
+  test_t(ForwardableAction &&action)
+      : action(std::forward<ForwardableAction>(action)) {}
+
   void run() override { action(); }
 
 private:
-  Action action;
+  std::conditional_t<std::is_function_v<Action>, Action *, Action> action;
 };
 
 template <class Action>
