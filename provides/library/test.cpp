@@ -1,5 +1,6 @@
 #include "testing_v1/test.hpp"
 
+#include <algorithm>
 #include <cstdio>
 #include <cstdlib>
 #include <tuple>
@@ -31,6 +32,15 @@ public:
 
 testing_v1::test_base_t::test_base_t() {
   test_private::tests().push_back(this);
+}
+
+testing_v1::test_base_t::~test_base_t() {
+  auto &tests = test_private::tests();
+  auto it = std::find(tests.rbegin(), tests.rend(), this);
+  if (it != tests.rend()) {
+    std::swap(*it, tests.back());
+    tests.pop_back();
+  }
 }
 
 int main() {

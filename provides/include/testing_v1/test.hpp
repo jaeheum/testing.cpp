@@ -18,7 +18,7 @@ class test_base_t {
 
 protected:
   test_base_t();
-  ~test_base_t() = default;
+  ~test_base_t();
 };
 
 } // namespace testing_v1
