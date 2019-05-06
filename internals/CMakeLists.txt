@@ -1,2 +1,1 @@
-add_conventional_executable_test(testing_test)
-target_link_libraries(testing_test PRIVATE testing_v1)
+add_conventional_executable_tests(PRIVATE testing_v1)
