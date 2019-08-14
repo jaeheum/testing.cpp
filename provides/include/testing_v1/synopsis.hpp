@@ -29,5 +29,6 @@ void verify(bool result);
 
 } // namespace testing_v1
 
-/// Runs all tests.
+/// Runs all registered test actions.  Usually there should only be a single
+/// test action per test program.
 int main();
