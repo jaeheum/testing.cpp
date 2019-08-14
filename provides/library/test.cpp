@@ -13,29 +13,31 @@ void testing_v1::verify(bool ok) {
   exit(1);
 }
 
-class testing_v1::test_private {
+class testing_v1::Private::Static {
+  friend void run_all();
   friend class test_base_t;
 
-  using tests_t = std::vector<testing_v1::test_base_t *>;
+  using tests_t = std::vector<test_base_t *>;
 
   static tests_t &tests() {
     static tests_t tests;
     return tests;
   }
 
-public:
   static void run_all() {
     for (auto test : tests())
       test->run();
   }
 };
 
-testing_v1::test_base_t::test_base_t() {
-  test_private::tests().push_back(this);
+void testing_v1::run_all() { Private::Static::run_all(); }
+
+testing_v1::Private::test_base_t::test_base_t() {
+  Static::tests().push_back(this);
 }
 
-testing_v1::test_base_t::~test_base_t() {
-  auto &tests = test_private::tests();
+testing_v1::Private::test_base_t::~test_base_t() {
+  auto &tests = Static::tests();
   auto it = std::find(tests.rbegin(), tests.rend(), this);
   if (it != tests.rend()) {
     std::swap(*it, tests.back());
@@ -44,6 +46,6 @@ testing_v1::test_base_t::~test_base_t() {
 }
 
 int main() {
-  testing_v1::test_private::run_all();
+  testing_v1::run_all();
   return 0;
 }
