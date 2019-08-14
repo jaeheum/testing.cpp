@@ -2,4 +2,12 @@
 
 Minimalist C++ test definition framework.
 
+```c++
+#include "testing_v1/test.hpp"
+
+using namespace testing_v1;
+
+auto a_test = test([]() { verify(1 + 1 == 2); });
+```
+
 See [`synopsis.hpp`](provides/include/testing_v1/synopsis.hpp) for the API.
