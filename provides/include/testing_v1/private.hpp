@@ -3,14 +3,14 @@
 #include "polyfill_v1/type_traits.hpp"
 #include <utility>
 
+int main();
+
 namespace testing_v1 {
 
 template <class Action> struct test_t;
 
-void run_all();
-
 class Private {
-  friend void run_all();
+  friend int ::main();
   template <class> friend struct test_t;
 
   class Static;

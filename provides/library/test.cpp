@@ -14,7 +14,7 @@ void testing_v1::verify(bool ok) {
 }
 
 class testing_v1::Private::Static {
-  friend void run_all();
+  friend int ::main();
   friend class test_base_t;
 
   using tests_t = std::vector<test_base_t *>;
@@ -30,8 +30,6 @@ class testing_v1::Private::Static {
   }
 };
 
-void testing_v1::run_all() { Private::Static::run_all(); }
-
 testing_v1::Private::test_base_t::test_base_t() {
   Static::tests().push_back(this);
 }
@@ -46,6 +44,6 @@ testing_v1::Private::test_base_t::~test_base_t() {
 }
 
 int main() {
-  testing_v1::run_all();
+  testing_v1::Private::Static::run_all();
   return 0;
 }

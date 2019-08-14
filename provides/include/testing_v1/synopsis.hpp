@@ -2,9 +2,10 @@
 
 #include "testing_v1/private.hpp"
 
-namespace testing_v1 {
-
 // test.hpp ====================================================================
+
+/// A minimalist test framework.
+namespace testing_v1 {
 
 /// Holds a registered test action and should only be used at namespace scope.
 template <class Action> struct test_t : Private::test_t<Action> {
@@ -27,3 +28,6 @@ test_t<std::remove_cvref_t<Action>> test(Action &&action);
 void verify(bool result);
 
 } // namespace testing_v1
+
+/// Runs all tests.
+int main();
