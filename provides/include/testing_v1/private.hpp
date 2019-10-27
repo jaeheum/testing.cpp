@@ -39,5 +39,5 @@ template <class Action> class testing_v1::Private::test_t : test_base_t {
 
   void run() override;
 
-  std::conditional_t<std::is_function_v<Action>, Action *, Action> action;
+  Action action;
 };

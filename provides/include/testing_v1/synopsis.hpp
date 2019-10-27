@@ -21,8 +21,7 @@ template <class Action> struct test_t : Private::test_t<Action> {
 
 /// Creates and registers a test action and should only be used at namespace
 /// scope.
-template <class Action>
-test_t<std::remove_cvref_t<Action>> test(Action &&action);
+template <class Action> test_t<std::decay_t<Action>> test(Action &&action);
 
 /// Prints `FAIL` and `exit(1)`s the program if the result is false.
 void verify(bool result);
