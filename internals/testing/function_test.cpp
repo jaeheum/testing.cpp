@@ -1,6 +1,6 @@
-#include "testing_v1/test.hpp"
+#include "testing_v2/test.hpp"
 
-using namespace testing_v1;
+using namespace testing_v2;
 
 static void function() { verify(1 != 2); }
 

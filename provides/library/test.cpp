@@ -1,4 +1,4 @@
-#include "testing_v1/test.hpp"
+#include "testing_v2/test.hpp"
 
 #include <algorithm>
 #include <cstdio>
@@ -6,14 +6,27 @@
 #include <tuple>
 #include <vector>
 
-void testing_v1::verify(bool ok) {
+#if __cpp_lib_source_location >= 201907L
+void testing_v2::verify(bool ok, const std::source_location &location) {
+  if (ok)
+    return;
+  fprintf(stderr,
+          "FAIL %s:%d [%s]\n",
+          location.file_name(),
+          location.line(),
+          location.function_name());
+  exit(1);
+}
+#else
+void testing_v2::verify(bool ok) {
   if (ok)
     return;
   fprintf(stderr, "FAIL\n");
   exit(1);
 }
+#endif
 
-class testing_v1::Private::Static {
+class testing_v2::Private::Static {
   friend int ::main();
   friend class test_base_t;
 
@@ -30,11 +43,11 @@ class testing_v1::Private::Static {
   }
 };
 
-testing_v1::Private::test_base_t::test_base_t() {
+testing_v2::Private::test_base_t::test_base_t() {
   Static::tests().push_back(this);
 }
 
-testing_v1::Private::test_base_t::~test_base_t() {
+testing_v2::Private::test_base_t::~test_base_t() {
   auto &tests = Static::tests();
   auto it = std::find(tests.rbegin(), tests.rend(), this);
   if (it != tests.rend()) {
@@ -44,6 +57,6 @@ testing_v1::Private::test_base_t::~test_base_t() {
 }
 
 int main() {
-  testing_v1::Private::Static::run_all();
+  testing_v2::Private::Static::run_all();
   return 0;
 }

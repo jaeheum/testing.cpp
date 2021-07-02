@@ -1,1 +1,1 @@
-add_conventional_executable_tests(PRIVATE testing_v1)
+add_conventional_executable_tests(PRIVATE testing_v2)

@@ -1,11 +1,10 @@
 #pragma once
 
-#include "polyfill_v1/type_traits.hpp"
 #include <utility>
 
 int main();
 
-namespace testing_v1 {
+namespace testing_v2 {
 
 template <class Action> struct test_t;
 
@@ -19,9 +18,9 @@ class Private {
   template <class Action> class test_t;
 };
 
-} // namespace testing_v1
+} // namespace testing_v2
 
-class testing_v1::Private::test_base_t {
+class testing_v2::Private::test_base_t {
   friend class Static;
   template <class> friend class test_t;
 
@@ -31,9 +30,9 @@ class testing_v1::Private::test_base_t {
   virtual void run() = 0;
 };
 
-template <class Action> class testing_v1::Private::test_t : test_base_t {
+template <class Action> class testing_v2::Private::test_t : test_base_t {
   friend class Static;
-  template <class> friend struct testing_v1::test_t;
+  template <class> friend struct testing_v2::test_t;
 
   template <class ForwardableAction> test_t(ForwardableAction &&action);
 
