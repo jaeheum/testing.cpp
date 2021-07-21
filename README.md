@@ -13,12 +13,15 @@ auto a_test = test([]() { verify(1 + 1 == 2); });
 See [`synopsis.hpp`](provides/include/testing_v2/synopsis.hpp) for the API.
 
 ## changes from v1
-- no longer `requires` [polyfill.cpp](https://github.com/per-framework/polyfill.cpp)
-- prints failure locations with a c++20 compiler that features `<source_location>`
-c.f. [https://en.cppreference.com/w/cpp/compiler_support](https://en.cppreference.com/w/cpp/compiler_support)
+
+- no longer `requires`
+  [polyfill.cpp](https://github.com/per-framework/polyfill.cpp)
+- prints failure locations with a c++20 compiler that features
+  `<source_location>` c.f.
+  [https://en.cppreference.com/w/cpp/compiler_support](https://en.cppreference.com/w/cpp/compiler_support)
+
 ```
 1/3 Test #1: fail_test ........................***Failed    0.00 sec
-FAIL /home/foo/bar/fail_test.cpp:5 [void function_will_fail()]
+FAIL [void function_will_fail()] /home/foo/bar/fail_test.cpp:5 
 ...
 ```
-

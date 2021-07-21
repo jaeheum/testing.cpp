@@ -10,11 +10,20 @@
 void testing_v2::verify(bool ok, const std::source_location &location) {
   if (ok)
     return;
+  const char *embolden_red{"\033[1;31m"};
+  const char *italicize_red{"\033[3;31m"};
+  const char *reset{"\033[0m"};
   fprintf(stderr,
-          "FAIL %s:%d [%s]\n",
+          "%s%s%s [%s%s%s] %s:%d\n",
+          embolden_red,
+          "FAIL",
+          reset,
+          italicize_red,
+          location.function_name(),
+          reset,
           location.file_name(),
-          location.line(),
-          location.function_name());
+          location.line()
+          );
   exit(1);
 }
 #else
